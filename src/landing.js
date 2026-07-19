@@ -99,20 +99,6 @@ footer b{ color:#8fe0e6; }
 </head>
 <body>
 <div class="wrap">
-  <div class="warn">
-    <div class="t">⚠️ 免费开源项目 · 禁止售卖</div>
-    <div class="b"><b>如果你是通过付款来到本页面，请立即联系退款。</b><br>任何售卖本项目 / 模块的都是骗子。一经发现立即删库，血本无归。</div>
-  </div>
-  <div class="disc">
-    <div class="disc-t">免责声明</div>
-    <ol class="disc-list">
-      <li>本项目为免费开源工具，<b>仅供个人学习、研究与技术测试之用</b>，请勿用于任何违反所在国家/地区法律法规的用途。</li>
-      <li>使用本项目（含模块、脚本、选点页）所引发的<b>一切风险与后果，由使用者自行承担</b>，与开源项目原作者、贡献者及本页面维护者无关。</li>
-      <li>本项目与 <b>Apple Inc.</b> 无任何关联，不隶属、不代表 Apple，亦未获其授权或认可。</li>
-      <li>本项目<b>不在中国大陆提供服务</b>。</li>
-      <li>下载、安装或使用本项目，即视为你已阅读并同意本声明；如不同意，请立即停止使用。</li>
-    </ol>
-  </div>
 
   <header>
     <div class="logowrap"><img class="logo" src="/icon.svg" alt=""></div>
