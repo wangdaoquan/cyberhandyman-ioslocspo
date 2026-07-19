@@ -106,7 +106,7 @@ footer b{ color:#8fe0e6; }
   </header>
 
   <div class="ctas">
-    <a class="enter go" href="/picker">🗺️ 进入选点网页</a>
+    <a class="enter go" href="/picker">点击选择地点</a>
   </div>
 
   <div class="divider"></div>
