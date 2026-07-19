@@ -836,7 +836,7 @@ document.getElementById('urlInput').addEventListener('keydown', e => { if(e.key=
 document.getElementById('favNameInput').addEventListener('keydown', e => { if(e.key==='Enter') confirmFav(); });
 
 /* ---- Watermark: tiled, non-interactive, rebuilt if tampered with ---- */
-const WM_TEXT = 'YouTube：赛博工具人 @CyberHandyman 根据GitHub开源项目制作';
+const WM_TEXT = '根据GitHub开源项目制作';
 function buildWM() {
   let host = document.getElementById('wm');
   if (!host) { host = document.createElement('div'); host.id = 'wm'; host.className = 'wm'; host.setAttribute('aria-hidden','true'); document.body.appendChild(host); }
