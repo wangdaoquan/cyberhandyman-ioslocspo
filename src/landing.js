@@ -318,37 +318,6 @@ h2::before {
   line-height: 1.8; 
 }
 
-/* --- Watermark --- */
-.wm { 
-  position: fixed; 
-  inset: 0; 
-  z-index: 90; 
-  pointer-events: none; 
-  overflow: hidden; 
-  user-select: none; 
-  -webkit-user-select: none; 
-}
-
-.wm-i { 
-  position: absolute; 
-  inset: -60%; 
-  display: flex; 
-  flex-wrap: wrap; 
-  align-content: flex-start; 
-  transform: rotate(-24deg); 
-  opacity: 0.06; 
-}
-
-.wm-i span { 
-  flex: none; 
-  padding: 28px 32px; 
-  font-size: 16px; 
-  font-weight: 700; 
-  white-space: nowrap; 
-  color: #ffffff; 
-  letter-spacing: 0.5px; 
-}
-
 /* --- Toast --- */
 .toast { 
   position: fixed; 
@@ -428,34 +397,9 @@ footer b {
   </footer>
 </div>
 
-<div class="wm" id="wm" aria-hidden="true"><div class="wm-i" id="wmi"></div></div>
 <div class="toast" id="toast"></div>
 
 <script>
-/* ---- Watermark: tiled, non-interactive, rebuilt if tampered with ---- */
-var WM_TEXT = '根据GitHub开源项目制作';
-function buildWM(){
-  var host = document.getElementById('wm');
-  if (!host){ host = document.createElement('div'); host.id = 'wm'; host.className = 'wm'; host.setAttribute('aria-hidden','true'); document.body.appendChild(host); }
-  host.className = 'wm'; host.removeAttribute('style');
-  var n = Math.ceil((window.innerWidth * window.innerHeight) / 12000) + 40;
-  var s = '';
-  for (var i = 0; i < n; i++) s += '<span>' + WM_TEXT + '</span>';
-  host.innerHTML = '<div class="wm-i" id="wmi">' + s + '</div>';
-}
-function ensureWM(){
-  var host = document.getElementById('wm'), inner = document.getElementById('wmi');
-  if (!host || !inner || inner.textContent.indexOf('CyberHandyman') < 0) { buildWM(); return; }
-  var ch = getComputedStyle(host), ci = getComputedStyle(inner);
-  if (ch.display === 'none' || ch.visibility === 'hidden' || ch.position !== 'fixed' || parseFloat(ci.opacity) < 0.03) {
-    host.removeAttribute('style'); inner.removeAttribute('style'); buildWM();
-  }
-}
-buildWM();
-try { new MutationObserver(ensureWM).observe(document.body, { childList:true }); } catch(e) {}
-setInterval(ensureWM, 1500);
-window.addEventListener('resize', buildWM);
-
 var origin = location.origin;
 function u(file){ return origin + '/' + file; }
 var qxExtra = ', tag=iOS Location Spoofer, update-interval=172800, opt-parser=true, enabled=true';
