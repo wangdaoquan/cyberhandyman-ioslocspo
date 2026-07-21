@@ -6,102 +6,394 @@ export function getLandingHtml() {
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>iOS Location Spoofer · 虚拟定位</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#0a0c11">
+<meta name="theme-color" content="#0b0f17">
 <link rel="apple-touch-icon" href="/icon-180.png">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
 <style>
-:root{
-  --bg:#0a0c11; --card:#12161d; --card2:#191e28; --line:#242b38;
-  --cyan:#17c3cf; --cyan2:#0e97a1; --green:#22c55e; --green2:#159a45;
-  --red:#ff5b60; --amber:#f5a623; --txt:#eef2f8; --muted:#8a93a5; --mono:#7fe3ea;
+:root {
+  --bg: #0b0f17;
+  --card: rgba(22, 28, 38, 0.75);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card2: rgba(15, 20, 29, 0.6);
+  --line: #1e2638;
+  --cyan: #06b6d4;
+  --cyan-glow: rgba(6, 182, 212, 0.25);
+  --green: #10b981;
+  --green-glow: rgba(16, 185, 129, 0.25);
+  --txt: #f3f4f6;
+  --txt-sub: #9ca3af;
+  --muted: #6b7280;
+  --mono: #38bdf8;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
 }
-*{ margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-body{
-  font-family:-apple-system,system-ui,"SF Pro","Helvetica Neue",sans-serif;
-  color:var(--txt); line-height:1.5;
-  background:
-    radial-gradient(1100px 420px at 50% -140px, rgba(23,195,207,.16), transparent 70%),
-    radial-gradient(700px 360px at 90% 8%, rgba(34,197,94,.08), transparent 65%),
+
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+  color: var(--txt);
+  line-height: 1.6;
+  background: 
+    radial-gradient(1000px 500px at 50% -100px, rgba(16, 185, 129, 0.12), transparent 70%),
+    radial-gradient(800px 400px at 90% 20%, rgba(6, 182, 212, 0.08), transparent 60%),
     var(--bg);
-  background-attachment:fixed;
+  background-attachment: fixed;
+  min-height: 100vh;
 }
-.wrap{ max-width:600px; margin:0 auto; padding:20px 16px calc(44px + env(safe-area-inset-bottom)); }
 
-/* --- top warning: red accent bar + tint --- */
-.warn{ position:relative; background:linear-gradient(180deg,rgba(255,91,96,.16),rgba(255,91,96,.06)); border:1px solid rgba(255,91,96,.5); border-left:5px solid var(--red); border-radius:12px; padding:15px 18px; margin-bottom:12px; }
-.warn .t{ color:#ff6b70; font-size:20px; font-weight:800; letter-spacing:.4px; line-height:1.4; }
-.warn .b{ color:#ffdcdc; font-size:15.5px; font-weight:700; line-height:1.7; margin-top:9px; }
+.wrap { 
+  max-width: 580px; 
+  margin: 0 auto; 
+  padding: 32px 20px calc(48px + env(safe-area-inset-bottom)); 
+}
 
-/* --- disclaimer --- */
-.disc{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:13px 16px; margin-bottom:18px; }
-.disc-t{ font-size:13px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--cyan); margin-bottom:9px; }
-.disc-list{ margin:0; padding-left:17px; }
-.disc-list li{ font-size:12px; color:var(--muted); line-height:1.75; margin-bottom:6px; }
-.disc-list li b{ color:#c3ccdb; }
+/* --- Header / Branding --- */
+header { 
+  text-align: center; 
+  padding: 12px 0 24px; 
+}
 
-/* --- header / branding --- */
-header{ text-align:center; padding:8px 0 6px; }
-header .logowrap{ position:relative; width:74px; margin:0 auto 14px; }
-header .logo{ width:74px; height:74px; border-radius:20px; display:block; box-shadow:0 0 0 1px var(--line),0 10px 30px rgba(23,195,207,.28); }
-h1{ font-size:23px; font-weight:800; letter-spacing:.3px; background:linear-gradient(92deg,#eafcff,#7fe3ea 55%,#22c55e); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
-.ytline{ margin-top:13px; font-size:17.5px; font-weight:800; letter-spacing:.3px; line-height:1.5; }
-.ytline .yt{ color:#ff6b70; text-decoration:none; text-shadow:0 0 18px rgba(255,91,96,.45); }
-.credit{ font-size:12px; color:var(--muted); margin-top:9px; line-height:1.7; }
-.credit a{ color:#8fe0e6; text-decoration:none; }
+header .logowrap { 
+  position: relative; 
+  width: 80px; 
+  margin: 0 auto 18px; 
+}
 
-/* --- primary CTAs (green picker + video) --- */
-.ctas{ display:flex; gap:10px; margin:18px 0 4px; }
-.enter{ flex:1; display:flex; align-items:center; justify-content:center; gap:8px; padding:17px 14px; border:none; border-radius:14px; font-size:16px; font-weight:800; cursor:pointer; text-decoration:none; transition:transform .12s,box-shadow .12s; }
-.enter:active{ transform:scale(.97); }
-.enter.go{ background:linear-gradient(135deg,#2ee06a,#129a44); color:#04240f; box-shadow:0 10px 26px rgba(34,197,94,.34); }
-.enter.video{ background:transparent; color:#ff6b70; border:1.5px solid rgba(255,91,96,.6); flex:0 0 44%; }
-.enter.video:active{ background:rgba(255,91,96,.1); }
-.enter.tg{ width:100%; margin:10px 0 4px; background:transparent; color:#5cb8e8; border:1.5px solid rgba(42,171,238,.55); }
-.enter.tg:active{ background:rgba(42,171,238,.12); }
+header .logo { 
+  width: 80px; 
+  height: 80px; 
+  border-radius: 22px; 
+  display: block; 
+  box-shadow: 0 0 0 1px var(--card-border), 0 12px 32px var(--green-glow); 
+  transition: transform 0.3s ease;
+}
 
-.divider{ height:1px; background:linear-gradient(90deg,transparent,var(--line),transparent); margin:24px 0 20px; }
+header .logo:hover {
+  transform: translateY(-2px);
+}
 
-/* --- section heads with accent bar --- */
-h2{ font-size:16px; font-weight:800; margin-bottom:4px; display:flex; align-items:center; gap:9px; }
-h2::before{ content:""; width:4px; height:16px; border-radius:2px; background:linear-gradient(180deg,var(--cyan),var(--green)); }
-.sub{ font-size:12.5px; color:var(--muted); margin:0 0 14px 13px; }
-.note{ background:var(--card); border:1px solid var(--line); border-left:4px solid var(--cyan); border-radius:11px; padding:12px 14px; font-size:12.5px; color:#c3ccdb; margin-bottom:16px; }
-.note b{ color:var(--txt); }
+h1 { 
+  font-size: 24px; 
+  font-weight: 800; 
+  letter-spacing: -0.3px; 
+  background: linear-gradient(135deg, #ffffff 0%, #a5f3fc 50%, #6ee7b7 100%); 
+  -webkit-background-clip: text; 
+  background-clip: text; 
+  -webkit-text-fill-color: transparent; 
+}
 
-/* --- platform cards --- */
-.plat{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:12px; margin-bottom:12px; }
-.plat .big{ display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:14px; border:none; border-radius:11px; background:linear-gradient(135deg,var(--cyan),var(--cyan2)); color:#022a2d; font-size:15.5px; font-weight:800; cursor:pointer; text-align:center; text-decoration:none; transition:filter .12s,transform .12s; }
-.plat .big:active{ filter:brightness(1.1); transform:scale(.98); }
-.plat .line{ display:flex; align-items:center; gap:8px; margin-top:9px; }
-.plat .url{ flex:1; min-width:0; font-family:"SF Mono",ui-monospace,monospace; font-size:11px; color:var(--muted); background:var(--bg); border:1px solid var(--line); border-radius:8px; padding:8px 10px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.plat .copy{ flex:none; padding:8px 15px; border:1px solid var(--line); border-radius:8px; background:var(--card2); color:var(--txt); font-size:12.5px; font-weight:600; cursor:pointer; transition:all .12s; }
-.plat .copy:active{ background:#2a3140; }
-.plat .copy.ok{ background:var(--green); border-color:var(--green); color:#04240f; }
-.plat .pnote{ font-size:11.5px; color:var(--muted); margin-top:7px; line-height:1.6; }
+/* --- CTAs --- */
+.ctas { 
+  display: flex; 
+  gap: 12px; 
+  margin: 20px 0 8px; 
+}
 
-/* --- info boxes --- */
-.mitm{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:13px 15px; font-size:12.5px; color:#c3ccdb; margin-top:16px; }
-.mitm b{ color:var(--txt); }
-.mitm code{ display:inline-block; font-family:"SF Mono",ui-monospace,monospace; font-size:11.5px; color:var(--mono); word-break:break-all; line-height:2; }
-.mitm .hosts{ margin-top:8px; padding:10px 12px; background:var(--bg); border:1px solid var(--line); border-radius:9px; }
-.mitm .hosts code{ line-height:2.1; }
+.enter { 
+  flex: 1; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 8px; 
+  padding: 16px 20px; 
+  border: none; 
+  border-radius: var(--radius-lg); 
+  font-size: 16.5px; 
+  font-weight: 700; 
+  cursor: pointer; 
+  text-decoration: none; 
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); 
+}
 
-/* --- tiled diagonal watermark (continuous, self-restoring) --- */
-.wm{ position:fixed; inset:0; z-index:90; pointer-events:none; overflow:hidden; user-select:none; -webkit-user-select:none; }
-.wm-i{ position:absolute; inset:-60%; display:flex; flex-wrap:wrap; align-content:flex-start; transform:rotate(-24deg); opacity:.11; }
-.wm-i span{ flex:none; padding:26px 30px; font-size:17.5px; font-weight:800; white-space:nowrap; color:#8fe0e6; letter-spacing:.4px; }
+.enter.go { 
+  background: linear-gradient(135deg, #10b981, #059669); 
+  color: #ffffff; 
+  box-shadow: 0 8px 24px var(--green-glow); 
+}
 
-.toast{ position:fixed; left:50%; bottom:40px; transform:translateX(-50%) translateY(20px); background:rgba(8,10,14,.92); color:#fff; padding:11px 20px; border-radius:22px; font-size:14px; opacity:0; transition:all .25s; pointer-events:none; z-index:99; border:1px solid var(--line); }
-.toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
-footer{ text-align:center; font-size:11.5px; color:var(--muted); margin-top:26px; line-height:1.9; }
-footer b{ color:#8fe0e6; }
+.enter.go:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(16, 185, 129, 0.35);
+}
+
+.enter.go:active { 
+  transform: scale(0.98); 
+}
+
+.divider { 
+  height: 1px; 
+  background: linear-gradient(90deg, transparent, var(--line), transparent); 
+  margin: 28px 0; 
+}
+
+/* --- Section Heads --- */
+h2 { 
+  font-size: 18px; 
+  font-weight: 700; 
+  margin-bottom: 6px; 
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
+  color: #ffffff;
+}
+
+h2::before { 
+  content: ""; 
+  width: 4px; 
+  height: 18px; 
+  border-radius: 4px; 
+  background: linear-gradient(180deg, var(--cyan), var(--green)); 
+}
+
+.sub { 
+  font-size: 13.5px; 
+  color: var(--txt-sub); 
+  margin: 0 0 16px 14px; 
+}
+
+.note { 
+  background: var(--card); 
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border); 
+  border-left: 4px solid var(--cyan); 
+  border-radius: var(--radius-md); 
+  padding: 14px 16px; 
+  font-size: 13px; 
+  color: #d1d5db; 
+  margin-bottom: 20px; 
+  line-height: 1.65;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+.note b { 
+  color: #ffffff; 
+  font-weight: 600;
+}
+
+/* --- Platform Cards --- */
+.plat { 
+  background: var(--card); 
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border); 
+  border-radius: var(--radius-lg); 
+  padding: 14px; 
+  margin-bottom: 14px; 
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.plat:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.plat .big { 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 8px; 
+  width: 100%; 
+  padding: 12px 16px; 
+  border: none; 
+  border-radius: var(--radius-md); 
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(16, 185, 129, 0.15)); 
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  color: #a5f3fc; 
+  font-size: 15px; 
+  font-weight: 700; 
+  cursor: pointer; 
+  text-align: center; 
+  text-decoration: none; 
+  transition: all 0.2s ease; 
+}
+
+.plat .big:hover { 
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.25), rgba(16, 185, 129, 0.25)); 
+  border-color: rgba(6, 182, 212, 0.5);
+  color: #ffffff;
+}
+
+.plat .big:active { 
+  transform: scale(0.98); 
+}
+
+.plat .line { 
+  display: flex; 
+  align-items: center; 
+  gap: 8px; 
+  margin-top: 10px; 
+}
+
+.plat .url { 
+  flex: 1; 
+  min-width: 0; 
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; 
+  font-size: 11.5px; 
+  color: var(--txt-sub); 
+  background: var(--card2); 
+  border: 1px solid var(--card-border); 
+  border-radius: var(--radius-sm); 
+  padding: 8px 12px; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  white-space: nowrap; 
+}
+
+.plat .copy { 
+  flex: none; 
+  padding: 8px 16px; 
+  border: 1px solid var(--card-border); 
+  border-radius: var(--radius-sm); 
+  background: rgba(255, 255, 255, 0.05); 
+  color: var(--txt); 
+  font-size: 12.5px; 
+  font-weight: 600; 
+  cursor: pointer; 
+  transition: all 0.2s ease; 
+}
+
+.plat .copy:hover { 
+  background: rgba(255, 255, 255, 0.1); 
+}
+
+.plat .copy:active { 
+  transform: scale(0.95);
+}
+
+.plat .copy.ok { 
+  background: var(--green); 
+  border-color: var(--green); 
+  color: #ffffff; 
+}
+
+.plat .pnote { 
+  font-size: 12px; 
+  color: var(--txt-sub); 
+  margin-top: 10px; 
+  line-height: 1.6; 
+  padding: 8px 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-sm);
+}
+
+/* --- Info Boxes --- */
+.mitm { 
+  background: var(--card); 
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border); 
+  border-radius: var(--radius-lg); 
+  padding: 16px; 
+  font-size: 13px; 
+  color: #d1d5db; 
+  margin-top: 16px; 
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.mitm b { 
+  color: #ffffff; 
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+.mitm code { 
+  display: block; 
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; 
+  font-size: 11.5px; 
+  color: var(--mono); 
+  word-break: break-all; 
+  line-height: 1.8; 
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--card-border);
+  margin-top: 6px;
+}
+
+.mitm .hosts { 
+  margin-top: 8px; 
+}
+
+.mitm .hosts code { 
+  line-height: 1.8; 
+}
+
+/* --- Watermark --- */
+.wm { 
+  position: fixed; 
+  inset: 0; 
+  z-index: 90; 
+  pointer-events: none; 
+  overflow: hidden; 
+  user-select: none; 
+  -webkit-user-select: none; 
+}
+
+.wm-i { 
+  position: absolute; 
+  inset: -60%; 
+  display: flex; 
+  flex-wrap: wrap; 
+  align-content: flex-start; 
+  transform: rotate(-24deg); 
+  opacity: 0.06; 
+}
+
+.wm-i span { 
+  flex: none; 
+  padding: 28px 32px; 
+  font-size: 16px; 
+  font-weight: 700; 
+  white-space: nowrap; 
+  color: #ffffff; 
+  letter-spacing: 0.5px; 
+}
+
+/* --- Toast --- */
+.toast { 
+  position: fixed; 
+  left: 50%; 
+  bottom: 40px; 
+  transform: translateX(-50%) translateY(20px); 
+  background: rgba(18, 24, 38, 0.9); 
+  backdrop-filter: blur(16px);
+  color: #ffffff; 
+  padding: 12px 24px; 
+  border-radius: 30px; 
+  font-size: 14px; 
+  font-weight: 500;
+  opacity: 0; 
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); 
+  pointer-events: none; 
+  z-index: 99; 
+  border: 1px solid var(--card-border); 
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.toast.show { 
+  opacity: 1; 
+  transform: translateX(-50%) translateY(0); 
+}
+
+footer { 
+  text-align: center; 
+  font-size: 12px; 
+  color: var(--muted); 
+  margin-top: 32px; 
+  line-height: 2; 
+}
+
+footer b { 
+  color: var(--txt-sub); 
+  font-weight: 500;
+}
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <header>
-    <div class="logowrap"><img class="logo" src="/icon.svg" alt=""></div>
+    <div class="logowrap"><img class="logo" src="/icon.svg" alt="App Icon"></div>
     <h1>iOS Location Spoofer · 虚拟定位</h1>
   </header>
 
@@ -119,10 +411,12 @@ footer b{ color:#8fe0e6; }
 
   <div class="mitm">
     <b>Quantumult X 资源解析器 URL（QX 一键导入 / 重写引用需先配好）：</b><br>
-    <code>https://raw.githubusercontent.com/KOP-XIAO/QuantumultX/master/Scripts/resource-parser.js</code><br>
-    添加方式 —— 把下面这段填进 QX 配置：<br>
+    <code>https://raw.githubusercontent.com/KOP-XIAO/QuantumultX/master/Scripts/resource-parser.js</code>
+    <br>
+    <b>添加方式 —— 把下面这段填进 QX 配置：</b>
     <code>[general]<br>#复制下面这些内容（另起一行）<br>resource_parser_url=https://raw.githubusercontent.com/KOP-XIAO/QuantumultX/master/Scripts/resource-parser.js</code>
   </div>
+  
   <div class="mitm">
     <b>MITM 主机名（如全部配置成功仍不生效，在 MITM / HTTPS 解密中手动加入下面四个域名）：</b>
     <div class="hosts"><code>gs-loc.apple.com<br>gs-loc-cn.apple.com<br>bluedot.is.autonavi.com<br>bluedot.is.autonavi.com.gds.alibabadns.com</code></div>
@@ -133,8 +427,10 @@ footer b{ color:#8fe0e6; }
     GNU AGPL-3.0 · 仅供学习研究
   </footer>
 </div>
+
 <div class="wm" id="wm" aria-hidden="true"><div class="wm-i" id="wmi"></div></div>
 <div class="toast" id="toast"></div>
+
 <script>
 /* ---- Watermark: tiled, non-interactive, rebuilt if tampered with ---- */
 var WM_TEXT = '根据GitHub开源项目制作';
